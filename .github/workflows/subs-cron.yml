@@ -1,12 +1,11 @@
 # ai-chat-django/.github/workflows/subs-cron.yml
-name: charge-subscriptions (daily)
+name:
+  charge-subscriptions (daily)
 
 on:
-  # schedule:
-  #   # UTC!
-  #   # - cron: "0 15 * * *"  # ежедневно в 18:00 Мск
-  #   - cron: "0 0 1 * *"     # ежемесячно в 00:00 UTC == 03:00/04:00 в Мск
-  workflow_dispatch: {}       # ручной запуск
+  schedule:
+    - cron: '*/10 5-22 * * *'
+  workflow_dispatch: {} # ручной запуск
 
 permissions:
   contents: read
@@ -18,7 +17,7 @@ jobs:
     env:
       BACKEND_URL: ${{ secrets.BACKEND_URL }}
       CRON_SECRET: ${{ secrets.CRON_SECRET }}
-      LIMIT: "100"  # порция за один прогон
+      LIMIT: "100" # порция за один прогон
     steps:
       - name: Summary
         run: |
