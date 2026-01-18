@@ -1,16 +1,54 @@
 from pathlib import Path
+from decouple import config, Csv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-abl=ifw_n4j0o!5zu&wc3&u_vst#$^9$skuvd-pg*phjgg$e9q"
+SECRET_KEY = config("DJANGO_SECRET_KEY")
+# SECRET_KEY = "django-insecure-abl=ifw_n4j0o!5zu&wc3&u_vst#$^9$skuvd-pg*phjgg$e9q"
+DJANGO_ENV = config("DJANGO_ENV")
 
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",
+# ]
+
+if DJANGO_ENV == "local":
+
+    DEBUG = config("DEBUG", default=True, cast=bool)
+    CSRF_COOKIE_SECURE = False
+    CSRF_COOKIE_HTTPONLY = False
+
+    # ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = [
+        "127.0.0.1",  # Локальный хост для тестов
+        "localhost",  # Чтобы поддерживать локальный доступ через localhost
+    ]
+    CORS_ALLOW_ALL_ORIGINS = True
+
+    # MEDIA_ROOT = BASE_DIR / "media"
+    # MEDIA_URL = "/media/"
+
+    # FRONT_URL = "http://localhost:3000"
+    # DOMAIN = "localhost:8000"
+
+else:
+
+    DEBUG = False
+    CSRF_COOKIE_SECURE = True
+    CSRF_COOKIE_HTTPONLY = True
+
+    ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="", cast=Csv())
+    CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", default="", cast=Csv())
+
+    # MEDIA_ROOT = STATIC_ROOT / "media"
+    # MEDIA_URL = "/static/media/"
+    # DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
+
+    # FRONT_URL = "https://kid-front.onrender.com"
+    # DOMAIN = "kid-wlsf.onrender.com"
 
 
 INSTALLED_APPS = [
