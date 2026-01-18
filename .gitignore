@@ -1,0 +1,40 @@
+# Ignore environment variables
+.env
+
+# Ignore SQLite database
+# db.sqlite3
+
+# Ignore all __pycache__ directories
+**/__pycache__/
+
+# Ignore virtual environment
+.venv/
+venv/
+
+# Ignore .pyc files
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore backup files and logs
+*.bak
+*.log
+
+# Ignore Django secret keys and other sensitive data
+*.pem
+
+# Ignore IDE and editor config files
+.DS_Store
+.idea/
+.vscode/
+
+# Ignore coverage reports if you're using a tool like coverage.py
+.coverage
+.coverage.*
+
+# добавляем лишние теперь папки
+media/
+
+
+
+
