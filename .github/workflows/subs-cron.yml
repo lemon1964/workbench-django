@@ -3,8 +3,8 @@ name:
   charge-subscriptions (daily)
 
 on:
-  schedule:
-    - cron: '*/10 5-22 * * *'
+  # schedule:
+  #   - cron: '*/10 5-22 * * *'
   workflow_dispatch: {} # ручной запуск
 
 permissions:
